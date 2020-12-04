@@ -1,0 +1,404 @@
+<body>
+    <div class="container-fluid bootstrap snippet">
+  
+      <div class="row">
+        <div class="col-sm-6 col-lg-4">
+          <!--left col-->
+  
+  
+          <div class="card border-0 hovercard">
+            <div class="cardheader">
+  
+            </div>
+            <div class="avatar">
+              <span class="imgWrap">
+                <img alt="" [src]="createImagePath(userInfo.profileUrl)">
+              </span>
+              <div class="middle">
+                <div class="text">Change</div>
+              </div>
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{userInfo.firstName}} {{userInfo.lastName}}</a>
+              </div>
+              <div class="desc">Designer</div>
+              <hr>
+              <form style="max-width: 200px ;margin: auto ;">
+                <div class="form-group row">
+                  <label for="staticEmail" class="col-sm-8 col-form-label text-left">#Task Completed</label>
+                  <div class="col-sm-4">
+                    <span>10</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-sm-8 col-form-label text-left">#Active tasks</label>
+                  <div class="col-sm-4">
+                    <span>14</span>
+                  </div>
+                </div>
+              </form>
+              <hr>
+              <div class="desc">
+                "I like the way you work it
+                No diggity
+                I wanna bag it up"
+              </div>
+  
+            </div>
+            <hr>
+            <div class="bottom">
+              <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
+                <i class="fa fa-google-plus"></i>
+              </a>
+              <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
+                <i class="fa fa-behance"></i>
+              </a>
+            </div>
+          </div>
+  
+  
+  
+          <div class="card border-0">
+            <!-- <div class="card-header bg-transparent">
+                          <h6>
+                              Team Members
+                          </h6>
+                      </div>
+                      <div class="card-body bg-transparent">
+                          <table mat-table [dataSource]="dataSource" class="font">
+  
+                              <ng-container matColumnDef="photo">
+                                  <th mat-header-cell *matHeaderCellDef> </th>
+                                  <td mat-cell *matCellDef="let element">
+                                      <img src='../../../../assets/{{element.photo}}' height="42" width="42">
+                                  </td>
+                              </ng-container>
+                              <ng-container matColumnDef="name">
+                                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                              </ng-container>
+  
+                 
+  
+                              <ng-container matColumnDef="Role">
+                                  <th mat-header-cell *matHeaderCellDef> Role </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.Role}} </td>
+                              </ng-container>
+  
+  
+  
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table>
+                      </div> -->
+          </div>
+  
+  
+  
+  
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-9 col-lg-8">
+  
+          <div class="card border-0" id="home">
+  
+            <div class="card-header">
+              <h4>
+                <!-- <i class="fa i fa-info"></i> -->
+                User Information
+              </h4>
+  
+            </div>
+            <div class="card-body ">
+              <div class="container">
+                <div *ngIf="isAdmin">
+                  <nav class="navbar navbar-expand">
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <!-- <a class="nav-link" href="#"><i class="fa fa-user-times"></i></a> -->
+                        <!-- <button *ngIf = "!isActive" id = "navAdmin" style = "width: auto;border-radius: 5%;" class = "btn btn-light" (click) = "deactivateUser()" >Activate User</button> -->
+                      </li>
+                      <li class="nav-item">
+                        <div class="btn-group">
+                          <button href="#" id="navbarDropdown" type="button" mat-stroked-button data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="userCog fa fa-cog"></i>
+                          </button>
+                          <div class="dropdown-menu  " style="font-size: 13px" aria-labelledby="navbarDropdown">
+                            <a (click)="deleteUser()" class="dropdown-item">Delete
+                            </a>
+                            <a *ngIf="!userInfo.isActive" class="dropdown-item">Activate
+                            </a>
+                            <a (click)="deactivateUser()" *ngIf="userInfo.isActive" class="dropdown-item">Deactivate
+                            </a>
+                          </div>
+                        </div>
+  
+  
+                      </li>
+                      <li class="nav-item">
+  
+                      </li>
+  
+                    </ul>
+                  </nav>
+                </div>
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#menu3">User Info</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">My Tasks</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu2">Feed</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                                  <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+                                </li> -->
+                </ul>
+  
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div id="menu3" class="container tab-pane active"><br>
+                    <form class="form" [formGroup]="userInfoForm" (ngSubmit)="saveUser(userInfoForm.value)"
+                      id="registrationForm">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group input-group-sm mb-3">
+  
+                            <label for="first_name">
+                              First name
+                            </label>
+                            <input formControlName="first_name" (keyup)="onKey($event)" type="text"
+                              value="{{userInfo.firstName}}" class="form-control" id="first_name" placeholder="">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+  
+                          <div class="form-group input-group-sm mb-3">
+  
+                            <label for="last_name">
+                              Last name
+                            </label>
+                            <input formControlName="last_name" (keyup)="onKey($event)" type="text"
+                              value="{{userInfo.lastName}}" class="form-control" name="last_name" id="last_name"
+                              placeholder="" title="enter your last name if any.">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+  
+                          <div class="form-group input-group-sm mb-3">
+  
+                            <label for="phone">
+                              Email
+                            </label>
+                            <input formControlName="email" (keyup)="onKey($event)" value="{{userInfo.email}}" type="text"
+                              class="form-control" name="email" id="phone" placeholder=""
+                              title="enter your email if any.">
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group input-group-sm mb-3">
+  
+                            <label for="first_name">
+                              Addres
+                            </label>
+                            <input formControlName="address" (keyup)="onKey($event)" type="text"
+                              value="{{userInfo.address}}" class="form-control" name="address" id="first_name"
+                              placeholder="">
+                          </div>
+                        </div>
+  
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="input-group-sm">
+                            <label for="exampleFormControlSelect1">Position</label>
+                            <mat-select formControlName="role" [(value)]="selected" (change)="onKey($event)"
+                              [disabled]="!isAdmin" class="form-control" formControlName="status">
+                              <mat-option *ngFor="let teamrole of teamRoles" [value]="teamrole.id">{{teamrole.name}}
+                              </mat-option>
+  
+                            </mat-select>
+                          </div>
+                          <!-- <div class="form-group input-group-sm mb-3">
+  
+                                                      <label for="last_name">
+                                                          Position
+                                                      </label>
+                                                      <input (keyup)="onKey($event)" value="Designer" type="text" class="form-control"
+                                                          name="last_name" id="last_name" placeholder=""
+                                                          title="enter your last name if any.">
+                                                  </div> -->
+                        </div>
+  
+                        <div class="col-lg-4">
+  
+                          <div class="form-group input-group-sm mb-3">
+  
+                            <label for="phone">
+                              Phone Number
+                            </label>
+                            <input formControlName="phone" (keyup)="onKey($event)" value="{{userInfo.phoneNumber}}"
+                              type="text" class="form-control" name="phone" id="phone" placeholder=""
+                              title="enter your phone number if any.">
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group" input-group-sm mb-3>
+                            <label for="exampleFormControlTextarea1">About me</label>
+                            <textarea formControlName="description" (keyup)="onKey($event)"
+                              value="{{userInfo.description}}" class="form-control text-left"
+                              id="exampleFormControlTextarea1" rows="2"></textarea>
+                          </div>
+                        </div>
+  
+                      </div>
+                      <button type="button" *ngIf="showPasswordButton" mat-stroke-button (click)="changePasswordShow()"
+                        mat-stroked-button>Change Password</button>
+  
+                      <div class="text-right" *ngIf="Save">
+                        <button type="submit" class = "btn btn-inverse-primary btn-fw">Save</button>
+                      </div>
+                      <!-- <div class="row">
+                                              <div class="col-lg-12">
+                                                  <div class="form-group input-group-sm mb-3">
+  
+                                                      <label for="first_name">
+                                                          Skills
+                                                      </label>
+                                                      <p>Adobe Photoshop</p>
+                                                      <p>Ilustrator</p>
+  
+  
+                                                  </div>
+                                              </div>
+  
+                                          </div> -->
+                      <ngx-spinner size="medium" type="ball-spin">
+                        <p style="color: white"> Saving... </p>
+                      </ngx-spinner>
+  
+                      <div class="form-group">
+  
+                      </div>
+                    </form>
+                    <div *ngIf="changePass" class=row>
+                      <app-change-password></app-change-password>
+                    </div>
+                  </div>
+  
+                  <div id="menu1" class="container tab-pane fade"><br>
+                    <table matSort mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" class="table-dark table-hover">
+  
+  
+                      <ng-container matColumnDef="TaskName">
+                        <th mat-header-cell *matHeaderCellDef> Task </th>
+                        <td [class.selected]="element.id === selectedTaskId" [routerLink]="['../taskinfo',element.id]"
+                          id="Hover" mat-cell *matCellDef="let element"> Task {{element.taskNumber}}
+                          <span class="tooltiptext">Go to Task</span>
+                        </td>
+  
+                      </ng-container>
+  
+                      <ng-container matColumnDef="project">
+                        <th style="width: 150%;    padding-left: 80px; " mat-header-cell *matHeaderCellDef> Task </th>
+                        <td style="width: 150%;    padding-left: 80px;" [class.selected]="element.id === selectedTaskId"
+                          [routerLink]="['../taskinfo',element.id]" mat-cell *matCellDef="let element">
+                          {{element.taskTitle}}
+                          <p style="color: lightgray;font-weight: 200;font-size: 12px;">{{element.description}}</p>
+  
+                        </td>
+                        <span class="tooltiptext">Go to Task</span>
+                      </ng-container>
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="Progres">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.taskStatus.status}}
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="createdOn">
+                        <th mat-header-cell *matHeaderCellDef> Created On </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdOn  | date:'M/d/yyyy'}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="deadline">
+                        <th mat-header-cell *matHeaderCellDef> Deadline </th>
+                        <td mat-cell *matCellDef="let element"> {{element.deadline | date:'M/d/yyyy'}} </td>
+                      </ng-container>
+  
+  
+  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+                    </table>
+                    <ngx-spinner bdColor="rgba(0, 0, 0, 0.15)" [fullScreen]="false" size="medium" type="ball-spin">
+                      <!-- <p style="color: black"> Loading Data... </p> -->
+                    </ngx-spinner>
+                    <mat-paginator showFirstLastButtons [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+  
+                  </div>
+                  <!-- <div id="menu2" class="container tab-pane fade"><br>
+                                  <h3>Menu 2</h3>
+                                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                </div> -->
+                  <div id="menu2" class="container tab-pane fade"><br>
+                    <table matSort mat-table [dataSource]="dataSourceNot" (matSortChange)="sortData($event)" class="table-dark table-hover">
+  
+  
+                      <ng-container matColumnDef="Notification">
+                        <th mat-header-cell *matHeaderCellDef> Notifications </th>
+                        <td id="Hover" mat-cell *matCellDef="let element">
+                          <img class = "avatar2" alt="" [src]="createImagePath(element.user.profileUrl)">
+                             {{element.articleHeading}}
+                          {{element.createOn  | date:'EEEE, MMMM d, y'}}
+                          <span class="tooltiptext">Go to Task</span>
+                        </td>
+  
+                      </ng-container>
+                      <ng-container matColumnDef="action">
+                          <th mat-header-cell *matHeaderCellDef>  </th>
+                          <td id="Hover" mat-cell *matCellDef="let element">
+                              <i (click) = "deleteNotification(not.id)" class="fa fa-times"></i>                 
+                                 </td>
+    
+                        </ng-container>
+  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsNotificaton"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsNotificaton;"></tr>
+  
+                    </table>
+                    <ngx-spinner bdColor="rgba(0, 0, 0, 0.15)" [fullScreen]="false" size="medium" type="ball-spin">
+                      <p style="color: black"> Loading Data... </p>
+                    </ngx-spinner>
+                    <mat-paginator showFirstLastButtons [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+  
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+  
+            <hr>
+  
+  
+  
+          </div>
+  

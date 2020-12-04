@@ -1,0 +1,271 @@
+ <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Recent Tickets</h4>
+        <nav class="navbar navbar-expand navbar-nav bg-transparent ">
+            <ul class="navbar-nav mr-auto">
+              <li  class="nav-item">
+                <div ngbDropdown>
+                    <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                      New Item
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                        <a class="dropdown-item">Task</a>
+                        <a class="dropdown-item">Bug</a>
+                      <a class="dropdown-item">Feature</a>
+                      
+                    </div>
+                  </div>
+              
+     
+              <li class="nav-item ">
+                <div ngbDropdown>
+                    <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                      Assigned
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                     <mat-checkbox class = "example-margin dropdown-item"  (change)="onChange($event , data  )"  [color]="task.color" >Me</mat-checkbox>
+                    <div class = "dropdown-divider"></div>
+                    <div *ngFor = "let user of users" class="">
+                      <mat-checkbox class = "dropdown-item" (change)="onChange($event ,user.id )" class="example-margin dropdown-item text-capitalize" [color]="task.color" >{{user.firstName}} {{user.lastName}}</mat-checkbox>
+                    </div>
+                      
+                    </div>
+                  </div>
+                
+                </li>
+              <li class="nav-item ">
+                <div ngbDropdown>
+                    <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                      Status
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                    <mat-checkbox (change)="onChangeStatus($event ,1 )" [value] = "1" class="example-margin dropdown-item text-capitalize" [color]="task.color" >Created</mat-checkbox>
+                    <mat-checkbox (change)="onChangeStatus($event ,2 )" [value] = "2"  class="example-margin dropdown-item text-capitalize" [color]="task.color" >On Porgress</mat-checkbox>
+                    <mat-checkbox (change)="onChangeStatus($event ,3 )" [value] = "3"  class="example-margin dropdown-item text-capitalize" [color]="task.color" >Completed</mat-checkbox>
+                    <mat-checkbox (change)="onChangeStatus($event ,1002 )" [value] = "1002" class="example-margin dropdown-item  text-capitalize" [color]="task.color" >Resolved</mat-checkbox>
+                    </div>
+                      
+                  </div>
+               
+              </li>
+  
+              <li class="nav-item ">
+                <div ngbDropdown>
+                    <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                      Project
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                    <mat-checkbox (change)="onChangeStatus($event ,1 )" [value] = "1" class="example-margin dropdown-item text-capitalize" [color]="task.color" >Created</mat-checkbox>
+                    <mat-checkbox (change)="onChangeStatus($event ,2 )" [value] = "2"  class="example-margin dropdown-item text-capitalize" [color]="task.color" >On Porgress</mat-checkbox>
+                    <mat-checkbox (change)="onChangeStatus($event ,3 )" [value] = "3"  class="example-margin dropdown-item text-capitalize" [color]="task.color" >Completed</mat-checkbox>
+                    <mat-checkbox (change)="onChangeStatus($event ,4 )" [value] = "4" class="example-margin dropdown-item  text-capitalize" [color]="task.color" >Resolved</mat-checkbox>
+                    </div>
+                      
+                  </div>
+               
+              </li>
+            </ul>
+            <ul class = "navbar-nav mr-auto">
+              <li class = "nav-item mr-auto">
+                <form class="form-inline input-group-sm my-2 my-lg-0">
+                  <input  (keyup)="search($event)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                </form>
+              </li>
+            </ul>
+        
+        </nav>
+        <div class="table-responsive">
+          <table   mat-table [dataSource]="dataSource" matSort  (matSortChange)="sortData($event)" class=" table  table-hover">
+
+            <ng-container matColumnDef="select">
+              <th  *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()"
+                              [color] = "color">
+                </mat-checkbox>
+              </th>
+              <td  *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [aria-label]="checkboxLabel(row)"
+                              [color] = "color">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+            <ng-container  matColumnDef="assignedTo">
+                <th  *matHeaderCellDef> Assigned to </th>
+                <td  id = "Hover"  *matCellDef="let element"> 
+                  <img src="assets/images/faces/face1.jpg" alt="image"/>
+                        {{element.user.firstName}}    {{element.user.lastName}} 
+                     <!-- <span class="tooltiptext">Go to User</span> -->
+                     
+                </td>
+    
+            </ng-container>
+            <ng-container matColumnDef="TaskName">
+              <th  mat-sort-header *matHeaderCellDef> Task </th>
+              <td [class.selected]="element.id === selectedTaskId"[routerLink]="['../taskinfo',element.id]" id = "Hover"  *matCellDef="let element"> Task {{element.taskNumber}}    
+                   <!-- <span class="tooltiptext">Go to Task</span> -->
+              </td>
+    
+          </ng-container>
+            <ng-container matColumnDef="Title">
+                    <th  *matHeaderCellDef mat-sort-header> Title </th>
+                    <td id = "Hover"  *matCellDef="let element">
+                      {{element.taskTitle}} 
+                      <!-- <span class="tooltiptext">Go to Project</span> -->
+                    </td>
+    
+                </ng-container>
+                <ng-container matColumnDef="Area">
+                  <th  *matHeaderCellDef> Area </th>
+                  <td id = "Hover"  *matCellDef="let element">
+                    {{element.projects.projectname}} 
+                    <!-- <span class="tooltiptext">Go to Project</span> -->
+                  </td>
+  
+              </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="Progres">
+                <th mat-sort-header  *matHeaderCellDef> Status </th>
+                <td  *matCellDef="let element">
+                  <label *ngIf = "element.status == 1002" class="badge badge-gradient-info"> {{element.taskStatus.status}}</label>
+                  <label *ngIf = "element.status == 3" class="badge badge-gradient-success"> {{element.taskStatus.status}}</label>
+                  <label *ngIf = "element.status == 5" class="badge badge-gradient-danger"> {{element.taskStatus.status}}</label>
+                  <label *ngIf = "element.status == 1" class="badge badge-gradient-primary"> {{element.taskStatus.status}}</label>
+                  <label *ngIf = "element.status == 2" class="badge badge-gradient-warning"> {{element.taskStatus.status}}</label>
+
+                  
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="createdOn">
+              <th mat-sort-header  *matHeaderCellDef> Created On </th>
+              <td  *matCellDef="let element"> {{element.createdOn  | date:'M/d/yyyy'}} </td>
+          </ng-container>
+    
+            <ng-container matColumnDef="deadline">
+                <th mat-sort-header *matHeaderCellDef> Deadline </th>
+                <td  *matCellDef="let element"> {{element.deadline | date:'M/d/yyyy'}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="delete">
+              <th mat-sort-header  *matHeaderCellDef>  </th>
+              <td  *matCellDef="let element"> 
+                <i *ngIf = "isAdmin && taskSelected" (click) = "deleteTask(element.id)" class="mdi mdi-delete-forever"></i>
+               </td>
+          </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    
+        </table>
+        
+      <ngx-spinner bdColor = "rgba(0, 0, 0, 0.15)" [fullScreen] = "false" size="medium" type="ball-spin">
+    </ngx-spinner>
+ 
+          <!-- <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>
+                  Assignee
+                </th>
+                <th>
+                  Subject
+                </th>
+                <th>
+                  Status
+                </th>
+                <th>
+                  Last Update
+                </th>
+                <th>
+                  Tracking ID
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
+                  David Grey
+                </td>
+                <td>
+                  Fund is not recieved
+                </td>
+                <td>
+                  <label class="badge badge-gradient-success">DONE</label>
+                </td>
+                <td>
+                  Dec 5, 2017
+                </td>
+                <td>
+                  WD-12345
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="assets/images/faces/face2.jpg" class="mr-2" alt="image">
+                  Stella Johnson
+                </td>
+                <td>
+                  High loading time
+                </td>
+                <td>
+                  <label class="badge badge-gradient-warning">PROGRESS</label>
+                </td>
+                <td>
+                  Dec 12, 2017
+                </td>
+                <td>
+                  WD-12346
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image">
+                  Marina Michel
+                </td>
+                <td>
+                  Website down for one week
+                </td>
+                <td>
+                  <label class="badge badge-gradient-info">ON HOLD</label>
+                </td>
+                <td>
+                  Dec 16, 2017
+                </td>
+                <td>
+                  WD-12347
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image">
+                  John Doe
+                </td>
+                <td>
+                  Loosing control on server
+                </td>
+                <td>
+                  <label class="badge badge-gradient-danger">REJECTED</label>
+                </td>
+                <td>
+                  Dec 3, 2017
+                </td>
+                <td>
+                  WD-12348
+                </td>
+              </tr>
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+    </div>
+    <mat-paginator             
+    (page)="pageEvent = getServerData($event)"
+    showFirstLastButtons
+    [pageSizeOptions]="[5, 10, 25]">
+   </mat-paginator>

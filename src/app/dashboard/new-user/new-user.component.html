@@ -1,0 +1,137 @@
+<body>
+
+    <div style = "margin: auto;" class= "container-fluid card">
+    <br>
+            <!-- <h5>
+                New User 
+            </h5> -->
+            <hr>
+                <div id="menu3" class="card-body"><br>
+                        <form class="form" [formGroup]="createUserForm" (ngSubmit)="createUser(createUserForm.value)" action="##" method="post" id="registrationForm">
+                            <div class = "row">
+                                <div class = "col-lg-4">
+                                    <div class="text-center">
+                                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                                        <button style = "margin-top: 10px;"   type="button" class = "btn btn-inverse-primary btn-fw">Upload photo</button>
+                                        <input style="display:none;" type="file" class="text-center center-block file-upload">
+                                      </div>                          
+                                    </div>
+                                <div class = "col-lg-8">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="first_name">
+                                                    First name
+                                                </label>
+                                                <input type="text" value=""
+                                                    class="form-control" formControlName="first_name" id="first_name"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+            
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="last_name">
+                                                    Last name
+                                                </label>
+                                                <input type="text" value=""
+                                                    class="form-control" formControlName="last_name" id="last_name"
+                                                    placeholder="" title="enter your last name if any.">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+            
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="phone">
+                                                    Email
+                                                </label>
+                                                <input value="" type="text" class="form-control"
+                                                formControlName="email" id="phone" placeholder=""
+                                                    title="enter your phone number if any.">
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="first_name">
+                                                    Address
+                                                </label>
+                                                <input type="text" value="" class="form-control"
+                                                formControlName="Address" id="first_name" placeholder="">
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="last_name">
+                                                    Position
+                                                </label>
+                                                <mat-select  class="form-control"  formControlName="status">
+                                                    <mat-option *ngFor="let teamrole of teamRoles" [value]="teamrole.id">{{teamrole.name}}</mat-option>
+                                                   
+                                                  </mat-select>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-lg-4">
+            
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="phone">
+                                                    Phone Number
+                                                </label>
+                                                <input value="" type="text"
+                                                    class="form-control" formControlName="phone" id="phone" placeholder=""
+                                                    title="enter your phone number if any.">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+            
+                                            <div class="form-group input-group-sm mb-3">
+            
+                                                <label for="phone">
+                                                    Password
+                                                </label>
+                                                <input value="" type="text"
+                                                    class="form-control" formControlName="password" id="phone" placeholder=""
+                                                    title="enter your phone number if any.">
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group" input-group-sm mb-3>
+                                                <label for="exampleFormControlTextarea1">About me</label>
+                                                <textarea value=""
+                                                    class="form-control text-left" formControlName = "about" id="exampleFormControlTextarea1"
+                                                    rows="2"></textarea>
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <div class="text-right">
+                                <button   type="submit" class = "btn btn-inverse-primary btn-fw">Create</button>
+                                <hr>
+                           </div>
+                        </form>
+                </div>
+    </div>
+    <ngx-spinner size="medium" type="ball-spin">
+        <p style="color: white"> Saving... </p>
+      </ngx-spinner>
+    </body>
+    

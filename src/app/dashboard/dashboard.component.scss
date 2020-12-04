@@ -1,0 +1,154 @@
+@import '../../styles.scss';
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css'; 
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import '../../assets/scss/variables';
+@import "~compass-mixins/lib/compass";
+@import "~compass-mixins/lib/animate";
+@import "~bootstrap/scss/bootstrap";
+@import "../../assets/scss/fonts";
+@import "../../assets/scss/functions";
+
+/* === Icon fonts === */
+@import "~@mdi/font/scss/materialdesignicons";
+
+
+/* === Template mixins === */
+@import "../../assets/scss/mixins/animation";
+@import "../../assets/scss/mixins/badges";
+@import "../../assets/scss/mixins/buttons";
+@import "../../assets/scss/mixins/misc";
+@import "../../assets/scss/mixins/color-functions";
+@import "../../assets/scss/mixins/cards";
+@import "../../assets/scss/mixins/blockqoute";
+@import "../../assets/scss/mixins/popovers";
+@import "../../assets/scss/mixins/tooltips";
+
+/* === Core Styles === */
+@import "../../assets/scss/background";
+@import "../../assets/scss/typography";
+@import "../../assets/scss/reset";
+@import "../../assets/scss/responsive";
+@import "../../assets/scss/misc";
+@import "../../assets/scss/utilities";
+@import "../../assets/scss/demo";
+@import "../../assets/scss/spinner";
+
+/* === Components === */
+@import "../../assets/scss/components/forms";
+@import "../../assets/scss/components/checkbox-radio";
+@import "../../assets/scss/components/icons";
+@import "../../assets/scss/components/tables";
+@import "../../assets/scss/components/accordions";
+@import "../../assets/scss/components/buttons";
+@import "../../assets/scss/components/breadcrumbs";
+@import "../../assets/scss/components/badges";
+@import "../../assets/scss/components/cards";
+@import "../../assets/scss/components/preview";
+@import "../../assets/scss/components/tooltips";
+@import "../../assets/scss/components/popovers";
+@import "../../assets/scss/components/lists";
+@import "../../assets/scss/components/bootstrap-progress";
+@import "../../assets/scss/components/bootstrap-alerts";
+@import "../../assets/scss/components/tabs";
+@import "../../assets/scss/components/dropdowns"; 
+@import "../../assets/scss/components/date-picker"; 
+@import "../../assets/scss/components/pagination";
+@import "../../assets/scss/components/portfolio";
+@import "../../assets/scss/components/todo-list";
+
+@import "../../assets/scss/components/landing-screens/auth";
+
+/* === Layout === */
+@import "../../assets/scss/layout";
+.rounded-legend {
+  ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    li {
+      list-style-type: none;
+      color: $text-muted;
+      font-size: .75rem;
+      .legend-dots {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 100%;
+        display: inline-block;
+        vertical-align: text-bottom;
+        margin-right: .5rem;
+        .rtl & {
+          margin-left: .5rem;
+        }
+      }
+    }
+  }
+  &.legend-horizontal {
+    @include display-flex;
+    ul {
+      li {
+        display: inline-block;
+        margin-right: 1.5rem;
+        .rtl & {
+          margin-right: auto;
+          margin-left: 1.5rem;
+        }
+      }
+    }
+  }
+  &.legend-vertical {
+    ul {
+      li {
+        margin-top: 1rem;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+#visit-sale-chart-legend {
+  ul {
+    li {
+      &:nth-child(1) {
+        .legend-dots {
+          background: linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1));
+        }
+      }
+      &:nth-child(2) {
+        .legend-dots {
+          background: linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1));
+        }
+      }
+      &:nth-child(3) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))
+        }
+      }
+    }
+  }
+}
+
+#traffic-chart-legend {
+  ul {
+    li {
+      &:nth-child(1) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))
+        }
+      }
+      &:nth-child(2) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1));
+        }
+      }
+      &:nth-child(3) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1));
+        }
+      }
+    }
+  }
+}

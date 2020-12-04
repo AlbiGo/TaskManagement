@@ -1,0 +1,129 @@
+<body>
+
+    <div style="" class="card">
+      <br>
+      <br>
+      <div class = "card-header bg-transparent">
+        <h5>New Task</h5>
+      </div>
+      <div class = "card-body">
+      <form id="CreateTask" [formGroup]="createTaskForm" (ngSubmit)="createTask(createTaskForm.value)">
+        <div class="row">
+          <div class="col">
+            <div class=" input-group-sm">
+              <label for="formGroupExampleInput">Task Title</label>
+              <input type="text" class="form-control" formControlName="taskTitle" id="" value="">
+            </div>
+  
+            <div class="input-group-sm">
+              <label for="formGroupExampleInput">Subtitle
+              </label>
+              <input type="text" class="form-control" formControlName="project" id="">
+            </div>
+  
+  
+  
+  
+          </div>
+  
+          <!-- <p>
+    Description : If your sample is a protein, you MUST DETERMINE IF YOUR PROTEIN IS ALREADY PRESENT IN OUR DATABASE. 
+    </p> -->
+          <div class="col">
+            <div  class="input-group-sm">
+              <label for="">Assign to
+              </label>
+              <input typeahead_focus type="text" formControlName="assign" class="form-control text-capitalize" [(ngModel)]="assignModel" [ngbTypeahead]="search"
+                (focus)="focus$.next($any($event).target.value)"
+                 (click)="click$.next($any($event).target.value)"
+                #instance="ngbTypeahead" 
+                [inputFormatter]="formatter"
+                [resultFormatter]="formatter"
+  
+                /> </div>
+            <div class="input-group-sm">
+              <label for="">Priority</label>
+              <mat-select  class="form-control"  formControlName="priority"
+              id="exampleFormControlSelect1">
+              <mat-option value = "1">Low</mat-option>
+              <mat-option value = "2">Medium</mat-option>
+              <mat-option value = "3">High</mat-option>
+              <mat-option value = "1002">Critical</mat-option>
+            </mat-select>        
+            </div>
+           
+          </div>
+          
+          <div class="col">
+            
+            <div class="row">
+              <div class="input-group-sm">
+                <label for="formGroupExampleInput2">Start Date</label>
+                <div class="input-group input-group-sm">
+                  <input class="form-control" formControlName="startDate" value="" name="dp" [(ngModel)]="startDatemodel" ngbDatepicker
+                    #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                      <i class="mdi mdi-calendar"></i> 
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="row">
+                <div class="input-group-sm">
+                  <label for="">Deadline</label>
+                  <div class="input-group input-group-sm">
+                    <input class="form-control" formControlName="deadLine" value="" name="tr" [(ngModel)]="deadlineModel" ngbDatepicker
+                      #e="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="e.toggle()" type="button">
+                        <i class="mdi mdi-calendar"></i> 
+                      </button> 
+                  </div>
+              </div>
+            </div>
+          </div>
+      
+      </div>
+   
+   
+   
+    </div>
+        
+        
+        
+        <div clas="row">
+          <div class="col">
+            <div class="input-group-sm">
+              <label for="">References
+              </label>
+              <input type="text" class="form-control" formControlName="references" id="" value="">
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group-sm">
+              <label for="exampleFormControlTextarea1">Description</label>
+              <textarea class="form-control text-left" formControlName="description" id="" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+  
+  
+  
+        <hr>
+        <div class="text-right">
+          <input type="file" #file placeholder="Choose file" value="documentPath" (change)="uploadFile(file.files)" style="display:none;">
+          <button class = "btn btn-inverse-primary btn-fw" (click)="file.click()" style = "margin-right: 5px;margin-left: 5px;"  type="button" >Upload Document</button>
+          <button class = "btn btn-inverse-primary btn-fw" type="submit" >Create</button>
+          <hr>
+        </div>
+  
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+          <p style="color: white">Saving. </p>  
+          </ngx-spinner>
+      </form>
+      </div>
+    </div>
+  
+  </body>

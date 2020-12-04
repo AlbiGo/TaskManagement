@@ -1,0 +1,195 @@
+<body>
+
+  <div class="card">
+      <div class = "card-header bg-transparent">
+        <nav class="navbar navbar-expand navbar bg-transparent">
+            <ul class="navbar-nav mr-0">
+      
+              <li *ngIf="isAdmin" class="nav-item active">
+                <div ngbDropdown>
+                    <button *ngIf = "taskDetails.isActive && isCompleted" class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                        Resolve
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                      <a (click)="resolveTask(taskDetails.id)" class="dropdown-item">As Completed</a>
+                      <a (click)="cancelTask(taskDetails.id)" class="dropdown-item">Cancel Task</a>
+                      <a (click)="rejectTask(taskDetails.id)" class="dropdown-item">Reject</a>
+                      <a (click)="deleteTask(taskDetails.id)" class="dropdown-item">Remove</a>
+                    </div>
+                  </div>
+               
+                
+              </li>
+              <li *ngIf="taskDetails.status == 1002" class="nav-item active">
+                <button  class = "btn btn-inverse-primary btn-fw"  id="" style="margin-right: 5px;margin-left: 5px;" type="button"
+                role="button"  data-toggle="" aria-haspopup="true" (click)="openTaskDocument(taskDetails.designPath)"
+                aria-expanded="false">
+                Download Design
+              </button>
+              </li>
+              <li class="nav-item">
+                <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+                <button *ngIf="taskDetails.status == 1 || taskDetails.status == 2 && isAssignedToLoggedUser" class = "btn btn-inverse-primary btn-fw" type="button"  style="margin-right: 5px;margin-left: 5px;" (click)="file.click()">
+                  <i class="fa fa-paperclip"></i> Upload Design</button>
+              </li>
+              <li class="nav-item">
+                <input type="file" *ngIf="taskDetails.isActive"  #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+                <button type="button" *ngIf="taskDetails.isActive" class = "btn btn-inverse-primary btn-fw" style="margin-right: 5px;margin-left: 5px;" (click)="file.click()">
+                  <i class="fa fa-paperclip"></i> Attach Document</button>
+              </li>
+              <li class="nav-item">
+                <button type="button" *ngIf="taskDetails.isActive" class = "btn btn-inverse-primary btn-fw" style="margin-right: 5px;margin-left: 5px;" (click)="file.click()">
+                  <i class="fa fa-tasks"></i> Create minitask</button>
+              </li>
+              <li class="nav-item">
+                <button type="button" *ngIf="taskDetails.isActive" class = "btn btn-inverse-primary btn-fw" style="margin-right: 5px;margin-left: 5px;" (click)="file.click()">
+                  Create bug</button>
+              </li>
+              
+              
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item  " *ngIf="isAdmin && taskDetails.isActive">  
+                <div ngbDropdown>
+                  <button class="btn btn-gradient-primary" type="button" id="dropdownMenuIconButton6" ngbDropdownToggle>
+                    <i class="mdi mdi-dots-vertical"></i>           
+                  </button>
+                  <div ngbDropdownMenu class = "l" aria-labelledby="dropdownMenuIconButton6">
+                    <a (click) = "enableForm()" class="dropdown-item">Edit Task</a>
+                    <a class="dropdown-item">Cancel Task</a>
+                    <a class="dropdown-item">Remove Task</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+      </div>
+  
+
+    <div class="card-body">
+        <form id="CreateTask" [formGroup]="saveTaskForm" (ngSubmit)="saveTask(saveTaskForm.value)">
+          <div class="row">
+            <h5> Task {{taskDetails.taskNumber}}</h5>
+            <hr>
+            <p>
+                <label class="badge badge-gradient-danger">     
+                     Deadline : {{daysLeft}}
+                </label>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-lg-8">
+              <div class=" input-group-sm">
+                <input [readonly]="" type="text" class="form-control" formControlName="taskTitle" 
+                  [(ngModel)]="taskDetails.taskTitle">
+              </div>
+
+              <div class="input-group-sm">
+                <label for="formGroupExampleInput">Project
+                </label>
+                <input [readonly]="" type="text" class="form-control"   [(ngModel)]="taskDetails.projects.projectname"
+                  formControlName="project" id="">
+              </div>
+              <div class="input-group-sm">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea [readonly]="" class="form-control text-left des"   [(ngModel)]="taskDetails.description"
+                  formControlName="description" id="" rows="3"></textarea>
+              </div>
+              <div class="input-group-sm">
+                <label for="exampleFormControlTextarea1">Design Path</label>
+                <textarea [readonly]="" class="form-control text-left des"   [(ngModel)]="taskDetails.designPath"
+                  formControlName="description" id="" rows="3"></textarea>
+              </div>
+              <div class="input-group-sm">
+                <label for="">References
+                </label>
+                <input [readonly]="" type="text" class="form-control"   [(ngModel)]="taskDetails.references"
+                  formControlName="references" id="" value="">
+              </div>
+              <div class="input-group-sm">
+                <label for="exampleFormControlTextarea1">Comments</label>
+                <textarea formControlName="oldcomment" [readonly]="" class="form-control text-left border-0"
+                [value]="oldComments" formControlName="comment" id="" rows="3">
+                    </textarea>
+              </div>
+              <div class="input-group-sm">
+                <label for="exampleFormControlTextarea1">Add a comment</label>
+                <textarea formControlName="comment" class="form-control text-left border-0"
+                  formControlName="comment" id="" rows="1">
+                    </textarea>
+                <div class="text-right">
+                  <hr>
+                  <button type="button" (click)="addComment(saveTaskForm.value)" id="submitButton"
+                  class = "btn btn-inverse-primary btn-fw">Add Comment</button>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-4">
+
+              <div class="input-group-sm">
+                <label for="">Assigned to
+                </label>
+                <input  formControlName="assign" class="form-control text-capitalize"
+                [(ngModel)]="fullname"/>
+              </div>
+              <div class="input-group-sm">
+                <label for="">Priority</label>
+                <input type="text" class="form-control"  [(ngModel)]="taskDetails.priority"
+                  formControlName="priority" id="" >
+              </div>
+              <div class="input-group-sm">
+                <label for="formGroupExampleInput2">Created on</label>
+                <div class="input-group input-group-sm">
+                  <input class="form-control" formControlName="startDate"
+                     name="dp" [(ngModel)]="startDatemodel"
+                    ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button [hidden]="true" class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                      type="button"><span class="material-icons I">
+                        calendar_today
+                      </span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group-sm">
+                <label for="">Deadline</label>
+                <div class="input-group input-group-sm">
+                  <input class="form-control" formControlName="deadLine"
+                   name="tr" [value]="deadlineModel"
+                    ngbDatepicker #e="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button [hidden]="true" class="btn btn-outline-secondary calendar" (click)="e.toggle()"
+                      type="button"><span class="material-icons I">
+                        calendar_today
+                      </span></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group-sm">
+                <label for="exampleFormControlSelect1">Status</label>
+                <mat-select class="form-control" [(ngModel)] ="taskStatus"  formControlName="status"
+                  id="exampleFormControlSelect1">
+                  <mat-option *ngFor = "let status of statuses" [value]="status.value">
+                    {{status.viewValue}}</mat-option>
+                </mat-select>
+
+              </div>
+            </div>
+
+          </div>
+
+          <br>
+          <div class="text-right">
+            <button type="submit" id="submitButton" class = "btn btn-inverse-primary btn-fw">Save</button>
+            <hr>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  <ngx-spinner size="medium" type="ball-spin">
+    <p style="color: white"> Saving... </p>
+  </ngx-spinner>
+</body>

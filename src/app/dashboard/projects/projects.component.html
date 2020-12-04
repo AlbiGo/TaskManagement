@@ -1,0 +1,188 @@
+<nav class="navbar navbar-expand navbar-nav bg-transparent ">
+    <ul class="navbar-nav mr-auto">
+      <li  class="nav-item">
+         
+        <div  class="dropdown show">
+          <a  [routerLink]="['../createProject']"  style = " color:white;" class="btn btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            New Project
+          </a>
+          
+          <!-- *ngIf = "isAdmin" -->
+         
+        </div>
+
+        <li class="nav-item ">
+          <div ngbDropdown>
+              <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                Project Manager
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+              <mat-checkbox (change)="onChangeStatus($event ,1 )" [value] = "1" class="example-margin dropdown-item text-capitalize" [color]="color" >Created</mat-checkbox>
+              <mat-checkbox (change)="onChangeStatus($event ,2 )" [value] = "2"  class="example-margin dropdown-item text-capitalize" [color]="color" >On Porgress</mat-checkbox>
+              <mat-checkbox (change)="onChangeStatus($event ,3 )" [value] = "3"  class="example-margin dropdown-item text-capitalize" [color]="color" >Completed</mat-checkbox>
+              <mat-checkbox (change)="onChangeStatus($event ,4 )" [value] = "4" class="example-margin dropdown-item  text-capitalize" [color]="color" >Resolved</mat-checkbox>
+              </div>
+                
+            </div>
+         
+        </li>
+        <li class="nav-item ">
+          <div ngbDropdown>
+              <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                Status
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+              <mat-checkbox (change)="onChangeStatus($event ,1 )" [value] = "1" class="example-margin dropdown-item text-capitalize" [color]="color" >Created</mat-checkbox>
+              <mat-checkbox (change)="onChangeStatus($event ,2 )" [value] = "2"  class="example-margin dropdown-item text-capitalize" [color]="color" >On Porgress</mat-checkbox>
+              <mat-checkbox (change)="onChangeStatus($event ,3 )" [value] = "3"  class="example-margin dropdown-item text-capitalize" [color]="color" >Completed</mat-checkbox>
+              <mat-checkbox (change)="onChangeStatus($event ,4 )" [value] = "4" class="example-margin dropdown-item  text-capitalize" [color]="color" >Resolved</mat-checkbox>
+              </div>
+                
+            </div>
+         
+        </li>
+      <li class="nav-item ">
+        <!-- <div  class="dropdown show">
+          <a style = "color: white" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Status
+          </a>
+        
+          <div class="dropdown-menu form-check" aria-labelledby="dropdownMenuLink">
+            <mat-checkbox  class="example-margin text-capitalize" [color]="primary" >Created</mat-checkbox>
+            <mat-checkbox   class="example-margin text-capitalize" [color]="primary" >On Porgress</mat-checkbox>
+            <mat-checkbox   class="example-margin text-capitalize" [color]="primary" >Completed</mat-checkbox>
+            <mat-checkbox   class="example-margin text-capitalize" [color]="primary" >Resolved</mat-checkbox>
+
+          </div>
+        </div> -->
+      </li>
+
+      
+    </ul>
+    <ul class = "navbar-nav mr-auto">
+      <li class = "nav-item mr-auto">
+        <form class="form-inline input-group-sm my-2 my-lg-0">
+          <input  (keyup)="search($event)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </li>
+    </ul>
+
+</nav>
+<hr>
+<div style="overflow-x:auto;overflow-y:auto">
+    <table   mat-table [dataSource]="dataSource" matSort  (matSortChange)="sortData($event)" class="table table-hover">
+
+      <ng-container matColumnDef="select">
+        <th *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()"
+                        [color] = "color">
+          </mat-checkbox>
+        </th>
+        <td  *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)"
+                        [color] = "color">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container  matColumnDef="assignedTo">
+          <th  *matHeaderCellDef> Project Manager </th>
+          <td  id = "Hover" mat-cell *matCellDef="let element">
+            <div class="badge badge-outline-primary badge-pill">
+                <img src="assets/images/faces/face1.jpg" alt="image"/>
+                {{element.projectManager.firstName}}   
+                {{element.projectManager.lastName}}    
+            </div>
+            
+               <!-- <span class="tooltiptext">Go to User</span> -->
+          </td>
+
+      </ng-container>
+      <ng-container matColumnDef="TaskName">
+        <th  mat-sort-header *matHeaderCellDef> Project </th>
+        <td [class.selected]="element.id === selectedTaskId"[routerLink]="['../projectDetails',element.id]" id = "Hover"  *matCellDef="let element">
+          <i class=" projectiCon fa fa-wrench"></i>
+          <i style = "color: orangered;" class="mdi mdi-wrench"></i>
+          {{element.projectname}}    
+             <!-- <span class="tooltiptext">Go to Project</span> -->
+        </td>
+
+    </ng-container>
+    <ng-container matColumnDef="Porgress">
+      <th  mat-sort-header *matHeaderCellDef> Porgress </th>
+      <td [class.selected]="element.id === selectedTaskId"[routerLink]="['../projectDetails',element.id]" id = "Hover"  *matCellDef="let element">
+        <div class="progress">
+          <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>   
+           <!-- <span class="tooltiptext">Go to Project</span> -->
+      </td>
+
+  </ng-container>
+      <ng-container matColumnDef="Title">
+              <th  *matHeaderCellDef mat-sort-header> Description </th>
+              <td id = "Hover"  *matCellDef="let element">
+                <!-- <mat-icon style = "color: orangered;" class = "taskIcon">assignment</mat-icon>
+                <mat-icon *ngIf = "!true" style = "color: blueviolet;" class = "taskIcon">bug_report</mat-icon> -->
+
+                {{element.description}} 
+                <!-- <span class="tooltiptext">Go to Project</span> -->
+              </td>
+
+          </ng-container>
+        <ng-container matColumnDef="client">
+                <th  *matHeaderCellDef mat-sort-header> Client </th>
+                <td id = "Hover"  *matCellDef="let element">
+                  <!-- <mat-icon style = "color: orangered;" class = "taskIcon">assignment</mat-icon>
+                  <mat-icon *ngIf = "!true" style = "color: blueviolet;" class = "taskIcon">bug_report</mat-icon> -->
+  
+                  {{element.client.clientName}} 
+                  <!-- <span class="tooltiptext">Go to Project</span> -->
+                </td>
+  
+            </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="status">
+          <th mat-sort-header *matHeaderCellDef> Status </th>
+          <td *matCellDef="let element">
+            <label class="badge badge-gradient-success"> {{element.status}}</label>
+          </td>
+      </ng-container>
+      <ng-container matColumnDef="createdOn">
+        <th mat-sort-header  *matHeaderCellDef> Created On </th>
+        <td  *matCellDef="let element"> 
+            {{element.startDate  | date:'M/d/yyyy'}}
+         </td>
+    </ng-container>
+
+      <ng-container matColumnDef="deadline">
+          <th mat-sort-header  *matHeaderCellDef> Deadline </th>
+          <td  *matCellDef="let element">
+               {{element.deadline | date:'M/d/yyyy'}}
+             </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-sort-header  *matHeaderCellDef>  </th>
+        <td  *matCellDef="let element"> 
+             <!-- <i  *ngIf = "isAdmin && taskSelected" (click) = "deleteTask(element.id)" class="fa fa-times"></i>           -->
+         </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+
+  </table>
+  </div>
+  
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.15)" [fullScreen] = "false" size="medium" type="ball-spin">
+</ngx-spinner> -->
+<mat-paginator             
+     (page)="pageEvent = getServerData($event)"
+     showFirstLastButtons
+     [pageSizeOptions]="[5, 10, 25]">
+    </mat-paginator>

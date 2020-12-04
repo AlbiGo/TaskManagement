@@ -1,0 +1,148 @@
+<body>
+
+  <br>
+  <br>
+  <div class="">
+    <!-- <mat-card class="TableTitle"> -->
+    <nav class="navbar navbar-expand navbar-nav ">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+
+          <a *ngIf="isAdmin" class="btn btn-primary" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            New User
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <div ngbDropdown>
+            <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+              Status
+            </button>
+
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+              <mat-checkbox class="example-margin dropdown-item text-capitalize">Active</mat-checkbox>
+              <mat-checkbox class="example-margin dropdown-item text-capitalize">Non Active</mat-checkbox>
+
+
+            </div>
+          </div>
+        </li>
+        <li class="nav-item ">
+          <div ngbDropdown>
+            <button class="btn btn-primary" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+              Role
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+              <mat-checkbox class="example-margin dropdown-item text-capitalize">Member</mat-checkbox>
+              <mat-checkbox class="example-margin dropdown-item text-capitalize">Team Leader</mat-checkbox>
+              <mat-checkbox class="example-margin dropdown-item text-capitalize">Admin</mat-checkbox>
+              <mat-checkbox class="example-margin dropdown-item text-capitalize">Project Manager</mat-checkbox>
+
+
+            </div>
+          </div>
+        </li>
+        <li class="nav-item ">
+
+          <a (click)="addColumn()" *ngIf="isAdmin" class="btn btn-primary" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add column
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item mr-auto">
+          <form class="form-inline input-group-sm my-2 my-lg-0">
+            <input (keyup)="search($event)" class="form-control mr-sm-2" type="search" placeholder="Search"
+              aria-label="Search">
+          </form>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div class="table-responsive" style="overflow-x:auto;overflow-y:auto">
+      <table mat-table [dataSource]="dataSource" class=" table table-hover">
+        <ng-container matColumnDef="photo">
+          <th *matHeaderCellDef> </th>
+          <td id="phototd" mat-cell *matCellDef="let element">
+            <img [src]="createUserImage(element.profileUrl)">
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef> Name </th>
+          <td [class.selected]="element.id === selectedTaskId" [routerLink]="['../profile',element.id]"
+            class="text-capitalize" id="nametd" [routerLink]="['../profile']" *matCellDef="let element"><a>
+              {{element.firstName}} {{element.lastName}}
+            </a>
+            <!-- <span class="tooltiptext">Go to Profile</span> -->
+          </td>
+
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th *matHeaderCellDef> Email </th>
+          <td [class.selected]="element.id === selectedTaskId" [routerLink]="['../profile',element.id]"
+            class="text-capitalize" id="nametd" [routerLink]="['../profile']" *matCellDef="let element"><a>
+              {{element.email}}
+            </a>
+            <!-- <span class="tooltiptext">Go to Profile</span> -->
+          </td>
+
+        </ng-container>
+        <ng-container matColumnDef="createdOn">
+          <th *matHeaderCellDef> Created on </th>
+          <td [class.selected]="element.id === selectedTaskId" [routerLink]="['../profile',element.id]"
+            class="text-capitalize" id="nametd" [routerLink]="['../profile']" *matCellDef="let element"><a>
+              {{element.createdOn}}
+            </a>
+            <!-- <span class="tooltiptext">Go to Profile</span> -->
+          </td>
+
+        </ng-container>
+        <ng-container class="text-capitalize" matColumnDef="Role">
+          <th *matHeaderCellDef> Role </th>
+          <td *matCellDef="let element"> <span class="badge badge-pill badge-danger">
+              {{element.teamRoles.name}}
+            </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef> Status </th>
+          <td *matCellDef="let element">
+            <div *ngIf = "element.isActive" class="badge badge-success">Active</div>
+            <div *ngIf = "!element.isActive" class="badge badge-danger">Deactivated</div>
+
+          </td>
+        </ng-container>
+        <ng-container *ngIf="test" matColumnDef="address">
+          <th *matHeaderCellDef> Address </th>
+          <td *matCellDef="let element">
+            <div>{{element.address}}</div>
+          </td>
+        </ng-container>
+        <ng-container  matColumnDef="Actions">
+          <th *matHeaderCellDef> Actions </th>
+          <td *matCellDef="let element">
+            <div ngbDropdown>
+              <button class="btn btn-gradient-primary" type="button" id="dropdownMenuIconButton6" ngbDropdownToggle>
+                <i class="mdi mdi-dots-vertical"></i>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownMenuIconButton6">
+                <a class="dropdown-item">Edit User</a>
+                <a class="dropdown-item">Deactivate Account</a>
+                <a class="dropdown-item">Delete Account</a>
+                <a class="dropdown-item">Generate Report</a>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator showFirstLastButtons [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    </div>
+
+  </div>
+</body>

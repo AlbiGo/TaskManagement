@@ -1,0 +1,116 @@
+<body>
+
+    <div class="container-fluid card">
+        <br>
+        <div class = "card-body">
+            <form [formGroup]="firstFormGroup">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Project Title</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput"
+                                    value="Marketing Growth">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Description
+                                </label>
+                                <input type="text" class="form-control" id="formGroupExampleInput"
+                                    value="Some Subtitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Project
+                                    Manager</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput">
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Start Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" value="17/07/2019" name="dp"
+                                        [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary calendar"
+                                            (click)="d.toggle()" type="button">
+                                            <i class="mdi mdi-calendar"></i> 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">End Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" value="17/09/2019" name="dp"
+                                        [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary calendar"
+                                            (click)="d.toggle()" type="button">
+                                            <i class="mdi mdi-calendar"></i> 
+
+                                        </button> </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                 
+                        <div class="col">
+    
+    
+    
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Priority</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput2" value="High">
+                            </div>
+                      
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">
+                                    Client</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput2">
+                            </div>
+                  
+                        </div>
+                        <div class="">
+    
+                           
+                            <div class="row">
+                                <div class="col">
+                                    
+                                </div>
+                                <div class="col">
+                                    
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div clas="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Primary
+                                    Objective</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput2"
+                                    value="This project objective is to grow our presence on social media">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Description</label>
+                                <textarea style = "font-size: 11px;" class="form-control text-left" id="exampleFormControlTextarea1"
+                                    rows="3">This project objective is to grow our presence on social media</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button class = "btn btn-inverse-primary btn-fw" type="submit"  (click)="save()">Create Project</button>
+                    </div>
+                    <br>
+                </form>
+                <div>
+                   
+                </div>
+            </form> 
+        </div>
+       
+    </div>
+</body>
