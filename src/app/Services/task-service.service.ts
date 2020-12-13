@@ -92,7 +92,7 @@ if(filters.userIDs.length === 0 && filters.status.length == 0 )
   }
 
   downloadFile(serverPath): any {
-		return this.http.get('https://localhost:44342' + serverPath, {responseType: 'arraybuffer'});
+		return this.http.get('https://localhost:44342' + serverPath, {responseType: 'blob'});
   }
   getUserTasks(userID)  : Observable<any>
   {

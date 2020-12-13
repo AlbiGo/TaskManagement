@@ -404,8 +404,10 @@ export class TaskInfoComponent implements OnInit {
 
   openTaskDocument(serverPath) {
     debugger;
+    serverPath = this.taskDetails.designPath;
     if (serverPath !== null) {
         this.taskService.downloadFile(serverPath).subscribe(response => {
+          console.log(response)
           debugger
           const blob = new Blob([response], {
             type: 'application/zip'
