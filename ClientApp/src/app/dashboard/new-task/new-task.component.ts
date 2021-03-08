@@ -167,6 +167,7 @@ console.log(newTask);
 
       },
       err => {
+        this.spinner.hide();
         console.log(err);
         debugger;
       });

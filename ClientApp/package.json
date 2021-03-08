@@ -1,5 +1,5 @@
 {
-  "name": "Purple_angular_free",
+  "name": "Team Management",
   "version": "4.0.0",
   "scripts": {
     "ng": "ng",
@@ -27,7 +27,7 @@
     "@auth0/angular-jwt": "^4.2.0",
     "@mdi/font": "^5.7.55",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
-    "angular": "^1.7.9",
+    "angular": "^1.8.2",
     "angular-animate": "^1.7.9",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.3",
